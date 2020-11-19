@@ -1,11 +1,13 @@
 package com.amc.apirestfull.service;
 
+
 import java.util.List;
 
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.amc.apirestfull.converter.Convertidor;
@@ -76,9 +78,11 @@ public class NotaService {
 	
 	public List<MNota> obtenerTitulo(String titulo){	
 		logger.info("Obteniendo nota por titulo");
-		return convertidor.convertirLista(repositorio.findByTitulo(titulo));
-		
+		return convertidor.convertirLista(repositorio.findByTitulo(titulo));		
 	}
 	
+	public List<MNota>obtenerPorPaginacion(Pageable pageable){
+		return convertidor.convertirLista(repositorio.findAll(pageable).getContent());
+	}	
 	
 }

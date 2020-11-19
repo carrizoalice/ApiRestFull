@@ -1,9 +1,11 @@
 package com.amc.apirestfull.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,8 +42,8 @@ public class NotaController {
 		return service.borrar(nombre, id);
 	}
 	
-	@GetMapping("/notas")
-	public List<MNota> obtnerNotas(){
-		return service.obtener();
+	@GetMapping(value="/notas")
+	public List<MNota> obtnerNotas(Pageable pageable){
+		return service.obtenerPorPaginacion(pageable);
 	}
 }
